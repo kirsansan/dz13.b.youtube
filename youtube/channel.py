@@ -24,16 +24,19 @@ class Channel:
             self.content = youtube_build.channels().list(id=self.channel_id, part='snippet,statistics').execute()
 
     def print_info(self):
+        """ just touch set_info and print self.info"""
         if self.is_connected:
             self.set_info()
             print(self.info)
 
 
     def set_info(self):
+        """ set self.info """
         if self.is_connected:
             self.info = json.dumps(self.content, indent=2, ensure_ascii=False)
 
     def get_title(self):
+        """ parse title from content and print it """
         if self.is_connected:
             print(self.content["items"][0]["snippet"]["title"])
 
