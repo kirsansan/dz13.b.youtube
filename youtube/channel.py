@@ -12,6 +12,7 @@ class Channel:
         self.is_connected = False
         self.channel_name = None
         self.content = None
+        self.info = None
 
     def connect(self):
         """connect with channel and fill self.content"""
@@ -23,14 +24,31 @@ class Channel:
             self.is_connected = True
             self.content = youtube_build.channels().list(id=self.channel_id, part='snippet,statistics').execute()
 
-    def print_first(self):
-        print(json.dumps(self.content, indent=2, ensure_ascii=False))
+    def print_info(self):
+        if self.is_connected:
+            self.set_info()
+            print(self.info)
+
+
+    def set_info(self):
+        if self.is_connected:
+            self.info = json.dumps(self.content, indent=2, ensure_ascii=False)
+
+    def get_title(self):
+        if self.is_connected:
+            print(self.content["items"][0]["snippet"]["title"])
+
 
 
 if __name__ == '__main__':
     # 'UCMCgOm8GZkHp8zJ6l7_hIuA'  # вДудь
-    # 'UC5A-Wp9ujcr5g9sYagAafEA' # Смешарики
+    # 'UC5A-Wp9ujcr5g9sYagAafEA'  # Смешарики
     # 'UC1eFXmJNkjITxPFWTy6RsWg'  # Редакция
     ch = Channel('UC5A-Wp9ujcr5g9sYagAafEA')
     ch.connect()
-    ch.print_first()
+    ch.print_info()
+    print("\n ")
+    ch.get_title()
+
+
+
