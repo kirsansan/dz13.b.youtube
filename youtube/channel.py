@@ -16,7 +16,7 @@ class Channel:
     def connect(self):
         """connect with channel and fill self.content"""
         # YT_API_KEY скопирован из гугла и вставлен в переменные окружения
-        api_key: str = YOUTUBE_ID
+        api_key: str = YOUTUBE_ID  # type: ignore
         # создать специальный объект для работы с API
         youtube_build = build('youtube', 'v3', developerKey=api_key)
         if youtube_build:
