@@ -4,7 +4,7 @@ import json
 
 
 class Channel:
-    all = []
+    all : list = []
 
     def __init__(self, channel_id="default"):
         self.channel_id = channel_id
